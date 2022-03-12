@@ -3,64 +3,76 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Import Components
 import Header from "./Header";
+import FormAddToDo from "./FormAddToDo";
 
 class App extends PureComponent {
+
+    state = {
+        todos: []
+    }
+
+    addToDo(text) {
+        this.setState(prevState => {
+            return {
+                todos: [...prevState.todos,
+                { key: Date.now(), done: false, text }
+                ]
+            }
+        })
+    }
+
+
     render() {
         return (
-            <div class="App">
+            <div className="App">
                 <Header />
                 <main>
-                    <section class="jumbotron bg-light py-5">
-                        <div class="container d-flex flex-column align-items-center">
-                            <h1 class="jumbotron-heading">Welcome!</h1>
-                            <p class="lead text-muted">To get started, add some items to your list:</p>
-                            <div class="form-inline">
-                                <div class="form-group d-flex">
-                                    <input type="text" class="form-control mx-sm-3" placeholder="i want to do ..." />
-                                    <button class="btn btn-primary">add</button>
-                                </div>
-                            </div>
+                    <section className="jumbotron bg-light py-5">
+                        <div className="container d-flex flex-column align-items-center">
+                            <h1 className="jumbotron-heading">Welcome!</h1>
+                            <p className="lead text-muted">To get started, add some items to your list:</p>
+                            <FormAddToDo add={this.addToDo.bind(this)} />
                         </div>
                     </section>
-                    <div class="todosList">
-                        <div class="container">
-                            <div class="d-flex flex-column align-items-center ">
-                                <nav class="col-6 mb-3">
-                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active font-weight-bold" id="nav-home-tab">undone <span class="badge bg-secondary">9</span></a>
-                                        <a class="nav-item nav-link font-weight-bold" id="nav-profile-tab">done <span class="badge bg-success">9</span></a>
+                    <div className="todosList">
+                        <div className="container">
+                            <div className="d-flex flex-column align-items-center ">
+                                <nav className="col-6 mb-3">
+                                    <div className="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <a className="nav-item nav-link active font-weight-bold" id="nav-home-tab">undone <span className="badge bg-secondary">9</span></a>
+                                        <a className="nav-item nav-link font-weight-bold" id="nav-profile-tab">done <span className="badge bg-success">9</span></a>
                                     </div>
                                 </nav>
-                                <div class="col-6 mb-2">
-                                    <div class="d-flex justify-content-between align-items-center border rounded p-3">
+                                <div className="col-6 mb-2">
+                                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
                                         <div>
                                             hello roocket
                                         </div>
                                         <div>
-                                            <button type="button" class="btn btn-info btn-sm">edit</button>
-                                            <button type="button" class="btn btn-danger btn-sm ms-1">delete</button>
+                                            <button type="button" className="btn btn-info btn-sm">edit</button>
+                                            <button type="button" className="btn btn-danger btn-sm ms-1">delete</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6 mb-2">
-                                    <div class="d-flex justify-content-between align-items-center border rounded p-3">
+                                <div className="col-6 mb-2">
+                                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
                                         <div>
                                             hello roocket
                                         </div>
                                         <div>
-                                            <button type="button" class="btn btn-info btn-sm">edit</button>
-                                            <button type="button" class="btn btn-danger btn-sm ms-1">delete</button>
+                                            <button type="button" className="btn btn-info btn-sm">edit</button>
+                                            <button type="button" className="btn btn-danger btn-sm ms-1">delete</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6 mb-2">
-                                    <div class="d-flex justify-content-between align-items-center border rounded p-3">
+                                <div className="col-6 mb-2">
+                                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
                                         <div>
                                             hello roocket
                                         </div>
                                         <div>
-                                            <button type="button" class="btn btn-info btn-sm">edit</button>
-                                            <button type="button" class="btn btn-danger btn-sm ms-1">delete</button>
+                                            <button type="button" className="btn btn-info btn-sm">edit</button>
+                                            <button type="button" className="btn btn-danger btn-sm ms-1">delete</button>
                                         </div>
                                     </div>
                                 </div>
