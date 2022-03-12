@@ -1,5 +1,5 @@
 
-function Header (){
+function Header (props){
     return(
         <header>
         <div className="navbar navbar-dark bg-dark shadow-sm">

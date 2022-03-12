@@ -4,11 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Import Components
 import Header from "./Header";
 import FormAddToDo from "./FormAddToDo";
+import Todo from "./Todo";
 
 class App extends PureComponent {
 
     state = {
-        todos: []
+        todos: [],
+        statusToDo: false
     }
 
     addToDo(text) {
@@ -17,12 +19,22 @@ class App extends PureComponent {
                 todos: [...prevState.todos,
                 { key: Date.now(), done: false, text }
                 ]
+
             }
         })
     }
 
+    deleteToDo(key) {
+        this.setState(prevState => {
+            return {
+                todos: prevState.todos.filter(item => item.key != key)
+            }
+        })
+    }
 
     render() {
+
+        let filterToDo = this.state.todos.filter(item => item.done == this.state.statusToDo)
         return (
             <div className="App">
                 <Header />
@@ -39,45 +51,16 @@ class App extends PureComponent {
                             <div className="d-flex flex-column align-items-center ">
                                 <nav className="col-6 mb-3">
                                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                                        <a className="nav-item nav-link active font-weight-bold" id="nav-home-tab">undone <span className="badge bg-secondary">9</span></a>
-                                        <a className="nav-item nav-link font-weight-bold" id="nav-profile-tab">done <span className="badge bg-success">9</span></a>
+                                        <a className={`nav-item nav-link font-weight-bold ${!this.state.statusToDo ? 'active' : ''}`} id="nav-home-tab" onClick={() => this.setState({ statusToDo: false })}>undone <span className="badge bg-secondary">{this.state.todos.filter(item => item.done == false).length}</span></a>
+                                        <a className={`nav-item nav-link font-weight-bold ${this.state.statusToDo ? 'active' : ''}`} id="nav-profile-tab" onClick={() => this.setState({ statusToDo: true })}>done <span className="badge bg-success">{this.state.todos.filter(item => item.done == true).length}</span></a>
                                     </div>
                                 </nav>
-                                <div className="col-6 mb-2">
-                                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
-                                        <div>
-                                            hello roocket
-                                        </div>
-                                        <div>
-                                            <button type="button" className="btn btn-info btn-sm">edit</button>
-                                            <button type="button" className="btn btn-danger btn-sm ms-1">delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6 mb-2">
-                                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
-                                        <div>
-                                            hello roocket
-                                        </div>
-                                        <div>
-                                            <button type="button" className="btn btn-info btn-sm">edit</button>
-                                            <button type="button" className="btn btn-danger btn-sm ms-1">delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-6 mb-2">
-                                    <div className="d-flex justify-content-between align-items-center border rounded p-3">
-                                        <div>
-                                            hello roocket
-                                        </div>
-                                        <div>
-                                            <button type="button" className="btn btn-info btn-sm">edit</button>
-                                            <button type="button" className="btn btn-danger btn-sm ms-1">delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                {filterToDo.length == 0
+                                    ? <p>this not exist Todo</p>
+                                    : filterToDo.map(item => <Todo key={item.key} item={item} delete={this.deleteToDo.bind(this)}/>)
+                                }
 
+                            </div>
                         </div>
                     </div>
                 </main>
