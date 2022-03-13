@@ -7,7 +7,8 @@ function Todo (props){
                 {props.item.text}
             </div>
             <div>
-                <button type="button" className="btn btn-info btn-sm">edit</button>
+            <button type="button" className={`btn ${props.item.done ? "btn-warning" : "btn-success"} btn-sm`} onClick={() => props.done(props.item.key)}>{props.item.done ? "undone" : "done"}</button>
+                <button type="button" className="btn btn-info btn-sm ms-1">edit</button>
                 <button type="button" className="btn btn-danger btn-sm ms-1" onClick={() => props.delete(props.item.key)}>delete</button>
             </div>
         </div>
