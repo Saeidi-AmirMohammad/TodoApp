@@ -35,12 +35,23 @@ class App extends PureComponent {
     doneToDo(key) {
 
         let itemsDone = this.state.todos.find(item => item.key == key)
-        itemsDone.done = ! itemsDone.done;
+        itemsDone.done = !itemsDone.done;
 
         let newTodos = this.state.todos.filter(item => item.key != key)
 
         this.setState({
-            todos : [...newTodos , itemsDone]
+            todos: [...newTodos, itemsDone]
+        })
+    }
+
+    editToDo(key, text) {
+        let itemsDone = this.state.todos.find(item => item.key == key)
+        itemsDone.text = text;
+
+        let newTodos = this.state.todos.filter(item => item.key != key)
+
+        this.setState({
+            todos: [...newTodos, itemsDone]
         })
     }
 
@@ -69,7 +80,7 @@ class App extends PureComponent {
                                 </nav>
                                 {filterToDo.length == 0
                                     ? <p>this not exist Todo</p>
-                                    : filterToDo.map(item => <Todo key={item.key} item={item} delete={this.deleteToDo.bind(this)} done={this.doneToDo.bind(this)} />)
+                                    : filterToDo.map(item => <Todo key={item.key} item={item} delete={this.deleteToDo.bind(this)} done={this.doneToDo.bind(this)} edit={this.editToDo.bind(this)} />)
                                 }
 
                             </div>
