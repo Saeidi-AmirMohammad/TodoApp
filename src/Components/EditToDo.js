@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState , useContext} from "react"
+import TodosContext from "./Context/ToDos";
 
 function EditToDo(props) {
 
     const [text, setText] = useState(props.text);
+    const todosContext = useContext(TodosContext);
 
     let inputHandler = e => setText(e.target.value)
     return (
@@ -12,7 +14,7 @@ function EditToDo(props) {
                     <input value={text} onChange={inputHandler} className="form-control"/>
                 </div>
                 <div>
-                    <button type="button" className="btn btn-info btn-sm ms-1"onClick={() => props.edit(text)}>edit</button>
+                    <button type="button" className="btn btn-info btn-sm ms-1"onClick={() => todosContext.edit(text)}>edit</button>
                 </div>
             </div>
         </div>
